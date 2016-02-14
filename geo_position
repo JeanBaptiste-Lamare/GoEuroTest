@@ -1,0 +1,23 @@
+
+public class geo_position {
+	
+	private double latitude;
+	private double longitude;
+	
+	public geo_position(double latitude, double longitude){
+		this.latitude=latitude;
+		this.longitude=longitude;
+	}
+	
+	public double getLatitude(){
+		return this.latitude;
+	}
+	
+	public double getLongitude(){
+		return this.longitude;
+	}
+	
+	public String toString(){
+		return String.valueOf(this.latitude)+","+String.valueOf(this.longitude);
+	}
+}
