@@ -1,0 +1,68 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+
+public class CsvFileWriter {
+
+	private static final String COMMA_DELIMITER = ",";
+	private static final String NEW_LINE_SEPARATOR = "\n";
+	private static final String FILE_HEADER = "_id, name, type, latitude, longitude";
+
+	public static void writeCsvFile(String CITY_NAME) throws IOException {
+
+		LinkedList<City> Cities = JsonReader.read(CITY_NAME);
+
+		FileWriter fileWriter = null;
+
+		try {
+			if (!Cities.isEmpty()) {
+				fileWriter = new FileWriter(CITY_NAME);
+				fileWriter.append(FILE_HEADER.toString());
+				fileWriter.append(NEW_LINE_SEPARATOR);
+
+				for (City City : Cities) {
+					fileWriter.append(String.valueOf(City.get_id()));
+					fileWriter.append(COMMA_DELIMITER);
+					fileWriter.append(City.getName());
+					fileWriter.append(COMMA_DELIMITER);
+					fileWriter.append(City.getType());
+					fileWriter.append(COMMA_DELIMITER);
+					fileWriter.append(String.valueOf(City.getGeo_position()
+							.getLatitude()));
+					fileWriter.append(COMMA_DELIMITER);
+					fileWriter.append(String.valueOf(City.getGeo_position()
+							.getLongitude()));
+					fileWriter.append(NEW_LINE_SEPARATOR);
+				}
+				System.out.println("CSV file was created successfully");
+			}
+			if (Cities.isEmpty())
+				System.out.println("The city could not be found");
+
+		} catch (Exception e) {
+			System.out.println("Error in CsvFileWriter");
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if (fileWriter != null) {
+					fileWriter.flush();
+					fileWriter.close();
+				}
+			} catch (IOException e) {
+				System.out.println("Error while flushing/closing fileWriter");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+		try {
+			writeCsvFile(args[0]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
