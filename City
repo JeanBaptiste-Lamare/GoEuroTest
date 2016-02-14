@@ -1,0 +1,50 @@
+public class City {
+
+	private long _id;
+	private String name;
+	private String type;
+	private geo_position geo_position;
+
+	public City(long _id, String name, String type, geo_position geo_position) {
+		this._id = _id;
+		this.name = name;
+		this.type = type;
+		this.geo_position = geo_position;
+	}
+
+	public long get_id() {
+		return this._id;
+	}
+	
+	public void set_id(long id){
+		this._id=id;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name){
+		this.name=name;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+	
+	public void setType(String type){
+		this.type=type;
+	}
+	
+	public geo_position getGeo_position(){
+		return this.geo_position;
+	}
+	
+	public void setGeo_position(geo_position pos){
+		this.geo_position=pos;
+	}
+	
+	public String toString(){
+		return String.valueOf(this._id)+this.name+this.type+geo_position.toString();
+	}
+}
